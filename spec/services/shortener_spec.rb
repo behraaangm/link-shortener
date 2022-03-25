@@ -16,11 +16,14 @@ RSpec.describe Shortener do
     expect(shortener1.short_url).not_to eq(shortener2.short_url)
   end
 
-  it "Always gives a specific URL the same short url" do
+  it 'generates a Link with a uniq short url' do
     url = "https://www.myfavouritestartup.com/blog/how-to-minimize-risk"
-    shortener_a = Shortener.new(url)
-    shortener_b = Shortener.new(url)
-    expect(shortener_a.short_url).to eq(shortener_b.short_url)
+    shortener = Shortener.new(url)
+    link = shortener.create_link
+    expect(link.valid?).to be(true)
+
+    link2 = shortener.create_link
+    expect(link2.valid?).to be(true)
   end
 
 end

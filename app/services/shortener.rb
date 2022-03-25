@@ -2,14 +2,33 @@ require 'digest/sha2'
 
 class Shortener
 
-  attr_reader :url
+  attr_reader :url, :link_model
 
-  def initialize(url)
+  def initialize(url, link_model = Link)
     @url = url
+    @link_model = link_model
   end
 
   def short_url
-    Digest::SHA2.hexdigest(@url)[0..6]
+    i = 0
+    loop do
+      code = new_short_url(i)
+      break code unless link_model.exists?(short_url: code)
+      i += 1
+    end
+  end
+
+  def create_link
+    link_model.create(
+      original_url: url,
+      short_url: short_url
+    )
+  end
+
+  private
+
+  def new_short_url(iterator)
+    Digest::SHA2.hexdigest(url)[iterator..(iterator + 6)]
   end
 
 end

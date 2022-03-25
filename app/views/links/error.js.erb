@@ -1,3 +1,3 @@
-var message = 'the given URL is not valid';
 var element = document.getElementById('show-url');
-element.innerHTML = message;
+var html = "<%= j render 'error', message: 'the given URL is not valid' %>"
+element.innerHTML = html;

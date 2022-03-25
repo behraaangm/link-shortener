@@ -10,6 +10,12 @@ class LinksController < ApplicationController
     end
   end
 
+  def show
+    link = Link.find_by(short_url: params[:short_url])
+
+    redirect_to link.original_url
+  end
+
   private
 
   def link_params

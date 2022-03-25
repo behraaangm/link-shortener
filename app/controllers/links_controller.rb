@@ -12,8 +12,12 @@ class LinksController < ApplicationController
 
   def show
     link = Link.find_by(short_url: params[:short_url])
+    redirect_link = link.original_url
+    unless redirect_link[/\Ahttp:\/\//] || redirect_link[/\Ahttps:\/\//]
+      redirect_link = "http://#{redirect_link}"
+    end
 
-    redirect_to link.original_url
+    redirect_to redirect_link
   end
 
   def index

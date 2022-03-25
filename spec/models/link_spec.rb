@@ -16,6 +16,14 @@ RSpec.describe Link, type: :model do
     expect(link.valid?).to be(false)
   end
 
+  it "is invalid if the url is not formatted properly" do
+    link = Link.new(
+      original_url: "sdfghgfcggk",
+      short_url: '1234567'
+    )
+    expect(link.valid?).to be(false)
+  end
+
   it "always has an original URL and a short url" do
     link = Link.new(
       original_url: "https://www.myfavouritestartup.com/blog/how-to-minimize-risk",

@@ -1,0 +1,7 @@
+var element = document.getElementById("link-<%= @link.id %>");
+var hide_btn = document.getElementById("hide-btn-<%= @link.id %>");
+var reveal_btn = document.getElementById("reveal-btn-<%= @link.id %>");
+element.innerHTML = "<%= @link.full_short_url %>";
+hide_btn.style.display = 'none';
+reveal_btn.style.display = 'block';
+

@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="p-5">
+    <div><%= link_to "Home", root_path, class: "btn btn-primary mb-2" %></div>
+    <div class="digg_pagination">
+
+      <% @links.each do |link| %>
+        <div class="card">
+          <div class="card-body">
+            <span id="link-<%= link.id %>"><%= link.full_short_url %></span>
+            <%= link_to "Original", reveal_path(id: link.id), remote: true, class: "btn btn-warning", style: "float: right", id: "reveal-btn-#{link.id}" %>
+            <%= link_to "Shortened", hide_path(id: link.id), remote: true, class: "btn btn-warning", style: "float: right; display: none", id: "hide-btn-#{link.id}" %>
+          </div>
+        </div>
+      <% end %>
+      <%= will_paginate @links %>
+    </div>
+  </div>
+</div>
+

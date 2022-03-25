@@ -1,15 +1,15 @@
 <div class="container">
   <div class="p-5">
+    <%= link_to "All Links", links_path, class: "btn btn-info mb-2" %>
     <div class="card">
       <div class="card-body">
         <%= form_with(model: @link, local: false) do |form| %>
-          <h5 class="card-title">Enter a URL shorten</h5>
+          <h5 class="card-title">Enter a URL to shorten</h5>
           <%= form.text_field :original_url, class: 'form-control', placeholder: 'Enter a URL to shorten' %>
           <%= form.submit 'Generate', class: 'btn btn-primary mt-2' %>
         <% end %>
       </div>
       <div id="show-url"></div>
-
     </div>
   </div>
 </div>

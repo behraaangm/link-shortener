@@ -16,6 +16,18 @@ class LinksController < ApplicationController
     redirect_to link.original_url
   end
 
+  def index
+    @links = Link.all.paginate(page: params[:page], per_page: 5)
+  end
+
+  def reveal
+    @link = Link.find(params[:id])
+  end
+
+  def hide
+    @link = Link.find(params[:id])
+  end
+
   private
 
   def link_params

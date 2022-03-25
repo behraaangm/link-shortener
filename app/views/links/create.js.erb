@@ -1,2 +1,2 @@
-var shortUrl = "<%= @link.short_url %>"
-console.log(shortUrl)
+var element = document.getElementById('show-url');
+element.innerHTML = "<%= @link.full_short_url %>";

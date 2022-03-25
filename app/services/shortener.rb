@@ -1,5 +1,3 @@
-require 'digest/sha2'
-
 class Shortener
 
   attr_reader :url, :link_model
@@ -10,11 +8,9 @@ class Shortener
   end
 
   def short_url
-    i = 0
     loop do
-      code = new_short_url(i)
+      code = new_short_url
       break code unless link_model.exists?(short_url: code)
-      i += 1
     end
   end
 
@@ -27,8 +23,8 @@ class Shortener
 
   private
 
-  def new_short_url(iterator)
-    Digest::SHA2.hexdigest(url)[iterator..(iterator + 6)]
+  def new_short_url
+    SecureRandom.uuid[0..6]
   end
 
 end
